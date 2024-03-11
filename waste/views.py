@@ -42,7 +42,8 @@ class WasteView(viewsets.ModelViewSet):
         if image is None:
             print(f"Error: No se pudo leer la imagen {image_path}")
             label = "prueba"
-            return None
+            # aqui
+            return "imagen irreconocible"
 
         # Preprocesar la imagen
         preprocessed_image = self.preprocess_image(image)
@@ -54,6 +55,12 @@ class WasteView(viewsets.ModelViewSet):
 
         # Clasificar la imagen utilizando el modelo
         predictions = model.predict(preprocessed_image)
+        # aqui
+        # Verificar si la máxima probabilidad es menor que un umbral
+        max_probability = np.max(predictions)
+        threshold = 0.9  # Umbral arbitrario
+        if max_probability < threshold:
+            return "imagen irreconocible"
 
         # Obtener la clase con la probabilidad más alta
         predicted_class = np.argmax(predictions)
@@ -66,7 +73,7 @@ class WasteView(viewsets.ModelViewSet):
         elif predicted_class == 2:
             label = "verde"
         else:
-            print("La imagen es irreconocible.")
+            label = "imagen irreconocible"
         return label
 
     def create(self, request, format=None):
