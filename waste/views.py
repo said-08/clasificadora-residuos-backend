@@ -48,7 +48,7 @@ class WasteView(viewsets.ModelViewSet):
         preprocessed_image = self.preprocess_image(image)
 
         # Cargar el modelo de TensorFlow
-        model_path = 'C:\\Users\\leonel.martinez\\Desktop\\SaidMain\\SaidMain\\clasificadora-residuos-backend\\modelo_entrenado.h5'
+        model_path = 'C:\\Users\\said.salcedo\\Documents\\DEV\\modelo_entrenado.h5'
        # 
         model = tf.keras.models.load_model(model_path)
 
